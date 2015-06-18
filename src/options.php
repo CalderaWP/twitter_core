@@ -27,7 +27,15 @@ class options {
 	}
 
 	protected function set_auth_keys() {
-		$this->auth_keys = get_option( $this->prefix . 'keys', array() );
+		$this->auth_keys = wp_parse_args(
+			get_option( $this->prefix . 'keys', array() ),
+			array(
+				'consumer_key' => false,
+				'consumer_secret' => false,
+				'access_token' => false,
+				'access_token_secret' => false,
+			)
+		);
 
 	}
 
