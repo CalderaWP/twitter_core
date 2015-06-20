@@ -58,7 +58,7 @@ class core {
 	 * @since 0.0.1
 	 */
 	protected function set_options() {
-		$this->options = new options();
+		$this->options = new keys( 'cwp_tweet_core' );
 		$this->auth_keys = $this->options->get_auth_keys();
 	}
 
