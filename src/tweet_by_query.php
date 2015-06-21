@@ -15,6 +15,17 @@ namespace calderawp\twitter_core;
 class tweet_by_query {
 
 	/**
+	 * Holds a post object for the post that was found
+	 *
+	 * @since 0.2.0
+	 *
+	 * @access protected
+	 *
+	 * @var \WP_Post|object|null $post The post object for the post that as found.
+	 */
+	private $found_post;
+
+	/**
 	 * Tweet the first post from a WP_Query query
 	 *
 	 * @since 0.0.2
@@ -26,7 +37,9 @@ class tweet_by_query {
 		$post = $this->first_post_from_query( $args );
 		if ( is_object( $post ) ) {
 			new tweet_post( $post, $message_field );
+			$this->set_found_post( $post );
 		}
+
 	}
 
 	/**
@@ -50,6 +63,33 @@ class tweet_by_query {
 			return $query->posts[0];
 		}
 
+	}
+
+	/**
+	 * Set the found_post property
+	 *
+	 * @since 0.2.0
+	 *
+	 * @access protected
+	 *
+	 * @param \WP_Post|object $post The post object for the post that as found.
+	 */
+	protected function set_found_post( $post ) {
+		$this->found_post = $post;
+	}
+
+	/**
+	 * Get the found_post property
+	 *
+	 * @since 0.2.0
+	 *
+	 * @access protected
+	 *
+	 * @return \WP_Post|object|null $post The post object for the post that as found.
+	 */
+	public function get_found_post() {
+		return $this->found_post;
+		
 	}
 
 }
