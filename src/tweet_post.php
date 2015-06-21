@@ -79,11 +79,25 @@ class tweet_post extends core {
 	 */
 	protected function prepare_data() {
 		$url = get_permalink( $this->post->ID );
-		$img = get_post_thumbnail_id( $this->post->ID, 'large' );
+
+		/**
+		 * Override which image to send.
+		 *
+		 * @since 0.0.2
+		 *
+		 * @param int $img The image ID to send
+		 * @param int $id The post ID.
+		 */
+		$img = apply_filters( 'cwp_tweet_core_tweet_media', false, $this->post->ID );
+
+		if ( ! $img ) {
+			$img = get_post_thumbnail_id( $this->post->ID, 'large' );
+		}
+
 		if ( $img ) {
-			$data[ 'media' ][] = $img;
-		}else{
-			$data[ 'media' ] = array();
+			$data['media'][] = $img;
+		} else {
+			$data['media'] = array();
 		}
 
 		$data[ 'message' ] = sprintf( '%1s %2s', substr( $this->message_text, 0, 100 ), $url );
