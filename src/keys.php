@@ -41,7 +41,7 @@ class keys {
 	 *
 	 * @since 0.1.0
 	 *
-	 * param string $prefix Options prefix for storing/ getting keys.
+	 * @param string $prefix Options prefix for storing/ getting keys.
 	 */
 	public function  __construct( $prefix ) {
 		$this->set_prefix( $prefix );
