@@ -89,7 +89,7 @@ class tweet_by_query {
 	 */
 	public function get_found_post() {
 		return $this->found_post;
-		
+
 	}
 
 }
